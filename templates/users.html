@@ -1,0 +1,49 @@
+{% extends 'home.html' %}
+
+{% block style %}
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section id="works" class="works">
+    <div class="container ">
+        <div class="section-header">
+            <h2><a href="{% url 'adduser' %}">Add User</a></h2>
+
+             <table>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                </tr>
+                {% for user in rest %}
+                  <tr>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                  </tr>
+                  {%endfor%}
+              </table>
+
+        </div><!--/.section-header-->
+    </div>
+</section>
+
+{% endblock %}

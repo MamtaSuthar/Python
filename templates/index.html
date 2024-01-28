@@ -1,0 +1,33 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+
+<div>
+	{% for message in messages %}
+		<p>  {{message}} </p>
+	{% endfor %}
+</div>
+   	<!--list-topics start -->
+		<section id="list-topics" class="list-topics">
+			<div class="container">
+				<div class="list-topics-content">
+					<ul>
+						{% for member in rest %}
+						<li>
+							<div class="single-list-topics-content">
+								<div class="single-list-topics-icon">
+									<i class="{{ member.img }}"></i>
+								</div>
+								<h2><a href="#">{{ member.name }}</a></h2>
+								<p>{{ member.price }} listings</p>
+							</div>
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div><!--/.container-->
+
+		</section><!--/.list-topics-->
+		<!--list-topics end-->
+
+{% endblock %}
