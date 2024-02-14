@@ -1,0 +1,48 @@
+<section class="top-area">
+    <div class="header-area">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+
+            <div class="container">
+
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Travel<span>lo</span></a>
+
+                </div><!--/.navbar-header-->
+                <!-- End Header Navigation -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li  class="{% if request.path == '/' %}active{% endif %}"><a href="{% url 'home' %}">home</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="{% if request.path == '/accounts/editusers' %}active{% endif %}"> <a href="{% url 'editusers' %}">User</a></li>
+                            <li class="">
+                                <h1 style="margin-top:35px">{{ user.email }}</h1>
+                            </li>
+                            <li class=""><a href="{% url 'logout_view' %}"><i class="fa fa-sign-out"></i>
+                            </a></li>
+                        {% elif request.session.vendor_user %}
+                            <li class="{% if request.path == '/accounts/editvendors' %}active{% endif %}"> <a href="{% url 'editvendors' %}">User</a></li>
+                            <li class="{% if request.path == '/addmembers' %}active{% endif %}"> <a href="{% url 'addmembers' %}">Member</a></li>
+                            <li class="">
+                                <h1 style="margin-top:35px">{{ request.session.vendor_user.email}}</h1>
+                            </li>
+                            <li class=""> <a href="{% url 'vendor_logout' %}"><i class="fa fa-sign-out"></i></a></li>
+                        {% else %}
+                            <li class="{% if request.path == 'user_register' %}active{% endif %}"> <a href="{% url 'user_register' %}">User Login</a></li>
+                            <li class="{% if request.path == 'vendor' %}active{% endif %}"> <a href="{% url 'vendor' %}">Vendor Login</a></li>
+                        {% endif %}
+                    </ul><!--/.nav -->
+                </div><!-- /.navbar-collapse -->
+            </div><!--/.container-->
+        </nav><!--/nav-->
+        <!-- End Navigation -->
+    </div><!--/.header-area-->
+    <div class="clearfix"></div>
+
+</section><!-- /.top-area-->

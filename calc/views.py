@@ -5,16 +5,26 @@ from random import randint, randrange
 from django.core.files.storage import FileSystemStorage
 
 def home(request):
-    if request.user.is_authenticated:
-       rest = Member.objects.all().values()
-       return render(request,'index.html',{'rest':rest})
-    elif 'vendor_user' in request.session:
-      rest = Member.objects.filter(user_id=request.session['vendor_user']['id'],is_vendor=1).values()
-      return render(request,'index.html',{'rest':rest})
-    else:
-       rest = Member.objects.all().values()
-       return render(request,'index.html',{'rest':rest})
+    if request.method == 'GET':
+        query_name = request.GET.get('name')
+        query_location = request.GET.get('location')
 
+        if request.user.is_authenticated:
+            queryset = Member.objects.all()
+        elif 'vendor_user' in request.session:
+            queryset = Member.objects.filter(user_id=request.session['vendor_user']['id'], is_vendor=1)
+        else:
+            queryset = Member.objects.all()
+
+        if query_name:
+            queryset = queryset.filter(name__icontains=query_name)
+        if query_location:
+            queryset = queryset.filter(location__icontains=query_location)
+
+        rest = queryset.values()
+        return render(request, 'index.html', {'rest': rest})
+   
+    
 def addmembers(request):
     if request.method == 'POST':
         name = request.POST['name']

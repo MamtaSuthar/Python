@@ -16,7 +16,7 @@
 						<li>
 							<div class="single-list-topics-content">
 								<div class="single-list-topics-icon">
-                                    <img id="img" src="/media/{{ member.img }}" >
+                                    <img id="img" src="{{MEDIA_URL}}{{ member.img }}" >
 								</div>
                                 <h2>
                                     {% if user.is_authenticated %}

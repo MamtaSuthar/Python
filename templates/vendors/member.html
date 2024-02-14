@@ -22,7 +22,7 @@
                                     <div class="account-settings">
                                         <div class="user-profile">
                                             <div class="user-avatar">
-                                                <img src="/media/{{ member.img }}" >
+                                                <img src="{{MEDIA_URL}}{{ member.img }}" >
                                                 <input type="file" id="img" name="img" accept=".doc, .docx, .xml, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/*" value="{{member.img}}" required>
                                             </div>
                                         </div>
