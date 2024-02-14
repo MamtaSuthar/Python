@@ -46,7 +46,6 @@
         
         <!--responsive.css-->
         <link rel="stylesheet" href="{%  static 'css/responsive.css' %}">
-        
 
 		{% block style %}
     
@@ -76,16 +75,25 @@
 			            <!-- Collect the nav links, forms, and other content for toggling -->
 			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                    <li  class="active"><a href="{% url 'home' %}">home</a></li>
+			                    <li  class="{% if request.path == '/' %}active{% endif %}"><a href="{% url 'home' %}">home</a></li>
 								{% if user.is_authenticated %}
-								<li class=""> <a href="{% url 'editusers' %}">User</a></li>
-								<li class=""> <a href="{% url 'logout_view' %}">Logout</a></li>
-								<li class=""><h1 style="margin-top:35px">{{user.first_name}}</h1></li>
+									<li class="{% if request.path == '/accounts/editusers' %}active{% endif %}"> <a href="{% url 'editusers' %}">User</a></li>
+									<li class="">
+										<h1 style="margin-top:35px">{{ user.email }}</h1>
+									</li>
+									<li class=""><a href="{% url 'logout_view' %}"><i class="fa fa-sign-out"></i>
+									</a></li>
+								{% elif request.session.vendor_user %}
+									<li class="{% if request.path == '/accounts/editvendors' %}active{% endif %}"> <a href="{% url 'editvendors' %}">User</a></li>
+									<li class="{% if request.path == '/addmembers' %}active{% endif %}"> <a href="{% url 'addmembers' %}">Member</a></li>
+									<li class="">
+										<h1 style="margin-top:35px">{{ request.session.vendor_user.email}}</h1>
+									</li>
+									<li class=""> <a href="{% url 'vendor_logout' %}"><i class="fa fa-sign-out"></i></a></li>
 								{% else %}
-								<li class=""> <a href="{% url 'user_register' %}">User Login</a></li>
-								<li class=""> <a href="{% url 'vendor' %}">Vendor Login</a></li>
+									<li class="{% if request.path == 'user_register' %}active{% endif %}"> <a href="{% url 'user_register' %}">User Login</a></li>
+									<li class="{% if request.path == 'vendor' %}active{% endif %}"> <a href="{% url 'vendor' %}">Vendor Login</a></li>
 								{% endif %}
-								
 			                </ul><!--/.nav -->
 			            </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
@@ -96,47 +104,48 @@
 
 		</section><!-- /.top-area-->
 		<!-- top-area End -->
-
-		<!--welcome-hero start -->
-		<section id="home" class="welcome-hero">
-			<div class="container">
-				<div class="welcome-hero-txt">
-					<h2>best place to find and explore <br> that all you need </h2>
-					<p>
-						Find Best Place, Restaurant, Hotel, Real State and many more think in just One click 
-					</p>
-				</div>
-				<div class="welcome-hero-serch-box">
-					<div class="welcome-hero-form">
-						<div class="single-welcome-hero-form">
-							<h3>what?</h3>
-							<form action="index.html">
-								<input type="text" placeholder="Ex: palce, resturent, food, automobile" />
-							</form>
-							<div class="welcome-hero-form-icon">
-								<i class="flaticon-list-with-dots"></i>
-							</div>
+		{% if request.path == '/' %}
+				<!--welcome-hero start -->
+				<section id="home" class="welcome-hero">
+					<div class="container">
+						<div class="welcome-hero-txt">
+							<h2>best place to find and explore <br> that all you need </h2>
+							<p>
+								Find Best Place, Restaurant, Hotel, Real State and many more think in just One click 
+							</p>
 						</div>
-						<div class="single-welcome-hero-form">
-							<h3>location</h3>
-							<form action="index.html">
-								<input type="text" placeholder="Ex: london, newyork, rome" />
-							</form>
-							<div class="welcome-hero-form-icon">
-								<i class="flaticon-gps-fixed-indicator"></i>
+						<div class="welcome-hero-serch-box">
+							<div class="welcome-hero-form">
+								<div class="single-welcome-hero-form">
+									<h3>what?</h3>
+									<form action="index.html">
+										<input type="text" placeholder="Ex: palce, resturent, food, automobile" />
+									</form>
+									<div class="welcome-hero-form-icon">
+										<i class="flaticon-list-with-dots"></i>
+									</div>
+								</div>
+								<div class="single-welcome-hero-form">
+									<h3>location</h3>
+									<form action="index.html">
+										<input type="text" placeholder="Ex: london, newyork, rome" />
+									</form>
+									<div class="welcome-hero-form-icon">
+										<i class="flaticon-gps-fixed-indicator"></i>
+									</div>
+								</div>
+							</div>
+							<div class="welcome-hero-serch">
+								<button class="welcome-hero-btn" onclick="window.location.href='#'">
+									 search  <i data-feather="search"></i> 
+								</button>
 							</div>
 						</div>
 					</div>
-					<div class="welcome-hero-serch">
-						<button class="welcome-hero-btn" onclick="window.location.href='#'">
-							 search  <i data-feather="search"></i> 
-						</button>
-					</div>
-				</div>
-			</div>
-
-		</section><!--/.welcome-hero-->
-		<!--welcome-hero end -->
+		
+				</section><!--/.welcome-hero-->
+				<!--welcome-hero end -->
+	    {% endif %}
 
 
     {% block content %}
@@ -152,16 +161,6 @@
 			           		 <div class="navbar-header">
 				                <a class="navbar-brand" href="index.html">Travel<span>lo</span></a>
 				            </div><!--/.navbar-header-->
-			           	</div>
-			           	<div class="col-sm-9">
-			           		<ul class="footer-menu-item">
-			                    <li class="scroll"><a href="#works">how it works</a></li>
-			                    <li class="scroll"><a href="#explore">explore</a></li>
-			                    <li class="scroll"><a href="#reviews">review</a></li>
-			                    <li class="scroll"><a href="#blog">blog</a></li>
-			                    <li class="scroll"><a href="#contact">contact</a></li>
-			                    <li class=" scroll"><a href="#contact">my account</a></li>
-			                </ul><!--/.nav -->
 			           	</div>
 		           </div>
 				</div>

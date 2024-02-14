@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div>
+<div align="right">
 	{% for message in messages %}
 		<p>  {{message}} </p>
 	{% endfor %}
@@ -16,10 +16,17 @@
 						<li>
 							<div class="single-list-topics-content">
 								<div class="single-list-topics-icon">
-									<i class="{{ member.img }}"></i>
+                                    <img id="img" src="/media/{{ member.img }}" >
 								</div>
-								<h2><a href="#">{{ member.name }}</a></h2>
-								<p>{{ member.price }} listings</p>
+                                <h2>
+                                    {% if user.is_authenticated %}
+                                    <a href="view_members/{{ member.id }}">
+                                    {% elif request.session.vendor_user %}
+                                    <a href="members/{{ member.id }}">
+                                    {% else %}
+                                    {% endif %}
+                                {{ member.name }}</a></h2>
+                                <p>{{ member.price }} listings</p>
 							</div>
 						</li>
 						{% endfor %}

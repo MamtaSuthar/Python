@@ -1,0 +1,96 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+
+	<div align="right">
+		{% for message in messages %}
+			<p>  {{message}} </p>
+		{% endfor %}
+	</div>
+		<section id="list-topics" class="list-topics">
+      <div class="container ">
+        <div class="section-header">
+            <div class="login-box">
+              <div class="container">
+                <div class="row gutters">
+                  <form action="{% url 'addmembers' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row gutters">
+                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="account-settings">
+                                        <div class="user-profile">
+                                            <div class="user-avatar">
+                                                <img src="/media/{{ member.img }}" >
+                                                <input type="file" id="img" name="img" accept=".doc, .docx, .xml, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/*" value="{{member.img}}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="row gutters">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <h6 class="mb-2 text-primary">Edit Members</h6>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control"  id="name" name="name"  placeholder="Enter Name" value="{{member.name}}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="form-group">
+                                            <label for="price">Price</label>
+                                            <input type="price" class="form-control" id="price" name="price" placeholder="Enter Price" value="{{member.price}}" required>
+                                          </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                              <label for="location">Location</label>
+                                              <input type="location" class="form-control" id="location" name="location" placeholder="Enter location" value="{{member.location}}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="form-group">
+                                            <label for="state">State</label>
+                                            <input type="state" class="form-control" id="state" name="state" placeholder="Enter state" value="{{member.state}}" required>
+                                          </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="form-group">
+                                            <label for="city">City</label>
+                                            <input type="city" class="form-control" id="city" name="city" placeholder="Enter city" value="{{member.city}}" required>
+                                          </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 ">
+                                          <div class="form-group">
+                                            <input type="checkbox" id="offer" name="offer" value="{{ member.offer }}" {% if member.offer == 1 %} checked {% endif %} placeholder="Enter offer">
+                                            <label for="offer">Offer</label>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    </div>
+                                    <div class="row gutters">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="text-right">
+                                                <button type="submit" id="submit" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </form>                
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+		</section>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+<style>
+  #img{
+    margin-top: 1%;
+    width: 50%;
+    width: 50%;
+    margin-bottom: 1%;
+  }
+</style>
+	<div align="right">
+		{% for message in messages %}
+			<p>  {{message}} </p>
+		{% endfor %}
+	</div>
+		<section id="list-topics" class="list-topics">
+      <div class="container ">
+        <div class="section-header">
+            <div class="login-box">
+              <div class="container">
+                <div class="row gutters">
+                 
+                    <div class="row gutters">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="row gutters">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <h6 class="mb-3 text-primary">View Members</h6>
+                                        </div>
+                                        <div class="user-profile">
+                                          <div class="user-avatar">
+                                            <img id="img" src="/media/{{ member.img }}" >
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="form-group">
+                                            <label for="name">Name :</label>
+                                            {{member.name}}
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="form-group">
+                                            <label for="price">Price :</label>
+											                         {{member.price}}
+											
+                                          </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="form-group">
+                                              <label for="location">Location :</label>
+                                              {{member.location}}
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="form-group">
+                                            <label for="state">State :</label>
+                                            {{member.state}}
+                                          </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="form-group">
+                                            <label for="city">City :</label>
+                                            {{member.city}}
+                                          </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 ">
+                                          <div class="form-group"> 
+										                     	<label for="city">Offer :</label>
+                                            {% if member.offer == 1 %} Yes {% endif %} 
+                                          </div>
+                                      </div>
+                                    </div>
+                                    </div>
+                              
+                                </div>
+                        </div>
+                    </div>
+                           
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+		</section>
+{% endblock %}
