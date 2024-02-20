@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 ('img', models.ImageField(upload_to='images')),
                 ('price', models.CharField(max_length=255)),
                 ('offer', models.BooleanField(default=False)),
+                ('desc', models.TextField()),
                 ('location', models.CharField(max_length=255)),
                 ('city' , models.CharField(max_length=255)), 
                 ('state',models.CharField(max_length=255)),  
